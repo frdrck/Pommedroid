@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Page loaded="pageLoaded">
+  <StackLayout>
+    <Label text="username" cssClass="title"/>
+    <TextField text="{{ username }}" />
+
+    <Label text="password" cssClass="title"/>
+    <TextField text="{{ password }}" />
+
+    <Button text="LOGIN" tap="{{login}}" />
+    <Label text="{{message}}" textWrap="true" cssClass="message"/>
+  </StackLayout>
+</Page>
