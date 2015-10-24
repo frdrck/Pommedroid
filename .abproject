@@ -1,0 +1,28 @@
+{
+	"ProjectName": "Pommedroid",
+	"ProjectGuid": "{0e88b4a4-5a16-4a89-ba9f-f0f587c2cb5d}",
+	"projectVersion": 1,
+	"AppIdentifier": "us.pomme.Pommedroid",
+	"DisplayName": "Pommedroid",
+	"Author": "",
+	"Description": "Pommedroid",
+	"BundleVersion": "1.0",
+	"AndroidVersionCode": "1",
+	"iOSDeviceFamily": [
+		"1",
+		"2"
+	],
+	"iOSBackgroundMode": [],
+	"ProjectTypeGuids": "{F0A65104-D4F4-4012-B799-F612D75820F6}",
+	"AndroidPermissions": [
+		"android.permission.INTERNET"
+	],
+	"DeviceOrientations": [
+		"Portrait",
+		"Landscape"
+	],
+	"AndroidHardwareAcceleration": "false",
+	"iOSStatusBarStyle": "Default",
+	"FrameworkVersion": "1.2.3",
+	"Framework": "NativeScript"
+}
