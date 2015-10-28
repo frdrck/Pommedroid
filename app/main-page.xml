@@ -4,7 +4,7 @@
     <Image src="~/img/pomme-apple.gif" stretch="none" cssClass="logo"/>
     <Label text="Welcome" cssClass="welcome"/>
 
-    <Label text="Please enter a username" cssClass="username-prompt"/>
+    <Label text="{{ message }}" cssClass="username-prompt"/>
     <TextField text="{{ username }}" cssClass="username"/>
 
     <Button text="Submit" tap="{{login}}" cssClass="login"/>
