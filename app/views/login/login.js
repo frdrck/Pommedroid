@@ -16,19 +16,13 @@ var serialize = function (data) {
 };
 
 loginModel.loaded = function(args) {
-  console.log("login loaded");
-
   var page = args.object;
   page.bindingContext = loginModel;
   loginModel.set("message", "Please enter a username");
 }
 
 loginModel.login = function () {
-  console.log("view login");
-
   user.login().then(function(response) {
-    console.log("login view success");
-
     loginModel.set("message", "Session: " + user.get("session"));
 
     var topmost = frameModule.topmost();
