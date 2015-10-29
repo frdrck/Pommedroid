@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Page loaded="loaded">
-  <StackLayout>
-    <Label text="Lobby" cssClass="welcome"/>
-    <Label text="{{ message }}" cssClass="username-prompt"/>
-    <Label text="{{ user.session }}" cssClass="username-prompt"/>
+  <StackLayout layout="vertical">
+    <Label text="{{ message }}" cssClass="welcome" />
 
-    <Button text="Reload" tap="{{loadLobby}}" width="250" cssClass="login"/>
+    <ListView items="{{ games }}">
+      <ListView.itemTemplate>
+        <GridLayout columns="*,*,auto">
+          <Label text="{{ name }}" col="0" cssClass="game"
+            horizontalAlignment="left" verticalAlignment="center" />
+          <Label text="{{ players + '/' + capacity }}" col="1" cssClass="capacity"
+            horizontalAlignment="right" verticalAlignment="center" />
+          <Button text="Join" col="2"
+            horizontalAlignment="right" verticalAlignment="center" />
+        </GridLayout>
+      </ListView.itemTemplate>
+    </ListView>
   </StackLayout>
 </Page>

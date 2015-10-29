@@ -1,3 +1,4 @@
+var observableArrayModule = require("data/observable-array");
 var observable = require("data/observable");
 var http = require("http");
 
@@ -14,24 +15,23 @@ var serialize = function (data) {
 
 
 var lobbyModel = new observable.Observable({
-  user: user
+  user: user,
+  games: new observableArrayModule.ObservableArray()
 });
 
 lobbyModel.loaded = function(args) {
   var page = args.object;
   page.bindingContext = lobbyModel;
 
-  lobbyModel.set("message", "Pick a game.");
+  lobbyModel.set("message", "Pick A Game");
+
+  lobbyModel.loadLobby();
 };
 
 lobbyModel.loadLobby = function () {
-  lobbyModel.set("message", "found 6 games");
-
   var formData = serialize({
     session: user.get("session"),
   });
-
-  console.log("listing games", formData);
 
   http.request({
     url: config.LIST_URL,
@@ -41,13 +41,20 @@ lobbyModel.loadLobby = function () {
     },
     content: formData
   }).then(function(response) {
-    console.log("list success", response.content);
-    lobbyModel.set("message", response.content);
-
     var json = response.content.toJSON();
-    console.log(json);
-  }, function(error) {
-    console.log("list error", error);
+
+    var games = [];
+    for (var game in json.games) {
+      if (game !== "lobbychat") {
+        games.push({
+          name: game,
+          players: json.games[game].players.length,
+          capacity: json.games[game].capacity
+        });
+      }
+    }
+
+    lobbyModel.set("games", new observableArrayModule.ObservableArray(games));
   });
 };
 

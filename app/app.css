@@ -10,7 +10,6 @@ Page {
 
 .welcome {
   font-size: 30;
-  margin:20;
   horizontal-align: center;
 }
 
@@ -56,4 +55,12 @@ button {
   color: #284848;
   margin:10 40;
   horizontal-align: center;
+}
+
+.game {
+  padding-left: 20;
+}
+
+.capacity {
+  padding-right: 20;
 }
