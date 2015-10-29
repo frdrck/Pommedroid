@@ -1,4 +1,15 @@
 {
-    "dependencies": {},
-    "devDependencies": {}
+	"dependencies": {
+		"tns-core-modules": "1.4.0"
+	},
+	"devDependencies": {},
+	"nativescript": {
+		"id": "org.nativescript.Pommedroid",
+		"tns-ios": {
+			"version": "1.4.1"
+		},
+		"tns-android": {
+			"version": "1.4.0"
+		}
+	}
 }
