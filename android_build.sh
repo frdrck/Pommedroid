@@ -1,1 +1,1 @@
-appbuilder build android --download
+tns build android
