@@ -1,17 +1,17 @@
 var textFieldModule = require("ui/text-field");
 var observable = require("data/observable");
 var http = require("http");
-var md5 = require("../lib/md5.js").md5;
+var md5 = require("~/lib/md5.js").md5;
 
 var BASE_URL = "http://pomme.us:32123/"
 var LOGIN_URL= BASE_URL + "user/login";
 var POLL_URL = BASE_URL + "game/poll";
 
-var mainViewModel = new observable.Observable();
+var loginModel = new observable.Observable();
 
-mainViewModel.set("message", "Please enter a username");
-mainViewModel.set("username", "asdfus");
-mainViewModel.set("password", "");
+loginModel.set("message", "Please enter a username");
+loginModel.set("username", "asdfus");
+loginModel.set("password", "");
 
 var serialize = function (data) {
   return Object.keys(data).map(function (keyName) {
@@ -19,9 +19,9 @@ var serialize = function (data) {
   }).join('&');
 };
 
-mainViewModel.login = function () {
-    var username = mainViewModel.get("username");
-    var password = mainViewModel.get("password");
+loginModel.login = function () {
+    var username = loginModel.get("username");
+    var password = loginModel.get("password");
 
     // md5 the password
     if (password) {
@@ -45,17 +45,17 @@ mainViewModel.login = function () {
 
       // successful login
       if (json.session) {
-        mainViewModel.set("message", "Session: " + json.session);
+        loginModel.set("message", "Session: " + json.session);
       // unsuccessful
       } else if (json.error) {
         if (json.error === "password") {
-          mainViewModel.set("message", "This account requires a password.");
+          loginModel.set("message", "This account requires a password.");
         } else if (json.error === "bad_password") {
-          mainViewModel.set("message", "Incorrect password. Try again.");
+          loginModel.set("message", "Incorrect password. Try again.");
         } else if (json.error === "illegal") {
-          mainViewModel.set("message", "Illegal username. Pick another.");
+          loginModel.set("message", "Illegal username. Pick another.");
         } else {
-          mainViewModel.set("message", "Error. Try Again.");
+          loginModel.set("message", "Error. Try Again.");
         }
       }
     }, function(error) {
@@ -63,4 +63,4 @@ mainViewModel.login = function () {
     });
 };
 
-exports.mainViewModel = mainViewModel;
+exports.loginModel = loginModel;

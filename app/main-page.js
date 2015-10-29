@@ -1,8 +1,8 @@
-var vmModule = require("./view-models/main-view-model");
+var vmModule = require("./views/login/login");
 
 function pageLoaded(args) {
   var page = args.object;
-  page.bindingContext = vmModule.mainViewModel;
+  page.bindingContext = vmModule.loginModel;
 }
 
 exports.pageLoaded = pageLoaded;
