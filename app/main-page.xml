@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Page loaded="pageLoaded">
   <StackLayout>
-    <Image src="~/img/pomme-apple.gif" stretch="none" cssClass="logo"/>
+    <Image src="~/img/pomme-apple.gif" stretch="aspectFit" width="180" cssClass="logo"/>
     <Label text="Welcome" cssClass="welcome"/>
 
     <Label text="{{ message }}" cssClass="username-prompt"/>
-    <TextField text="{{ username }}" cssClass="username"/>
+    <TextField text="{{ username }}" width="250" hint="username" cssClass="username"/>
+    <TextField text="{{ password }}" width="250" hint="password" cssClass="password" secure="true"/>
 
-    <Label text="Password" cssClass="password-prompt"/>
-    <TextField text="{{ password }}" cssClass="password"/>
+    <Button text="Submit" tap="{{login}}" width="250" cssClass="login"/>
 
-    <Button text="Submit" tap="{{login}}" cssClass="login"/>
-
+    <!--
+    Removing Twitter login and Create Account prompt for now.
     <Label text="Sign in with" cssClass="twitter-prompt"/>
     <Image src="~/img/twitterbird.png" stretch="none" cssClass="twitter-logo" />
 
     <Label text="Already have an account?" cssClass="have-account"/>
+    -->
   </StackLayout>
 </Page>
