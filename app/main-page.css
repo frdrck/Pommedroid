@@ -20,7 +20,9 @@
 
 .login {
   horizontal-align: center;
-
+  background-color: #FFFFFF;
+  border-width: 1;
+  border-color: black;
 }
 
 .twitter-prompt {
