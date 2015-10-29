@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Page loaded="loaded">
+  <StackLayout>
+    <Label text="Lobby" cssClass="welcome"/>
+    <Label text="{{ message }}" cssClass="username-prompt"/>
+    <Label text="{{ user.session }}" cssClass="username-prompt"/>
+    <TextField text="{{ user.username }}" width="250" hint="username" cssClass="username"/>
+    <TextField text="{{ user.password }}" width="250" hint="password" cssClass="password" secure="true"/>
+
+    <Button text="Reload" tap="{{loadLobby}}" width="250" cssClass="login"/>
+  </StackLayout>
+</Page>

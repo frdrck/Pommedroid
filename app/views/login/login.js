@@ -1,66 +1,47 @@
-var textFieldModule = require("ui/text-field");
+var frameModule = require("ui/frame");
 var observable = require("data/observable");
-var http = require("http");
-var md5 = require("~/lib/md5.js").md5;
 
-var BASE_URL = "http://pomme.us:32123/"
-var LOGIN_URL= BASE_URL + "user/login";
-var POLL_URL = BASE_URL + "game/poll";
+var User = require("~/shared/view-models/user");
+var user = new User();
 
-var loginModel = new observable.Observable();
+var loginModel = new observable.Observable({
+  user: user
+});
 
-loginModel.set("message", "Please enter a username");
-loginModel.set("username", "asdfus");
-loginModel.set("password", "");
-
+// util function that should be refactored.
 var serialize = function (data) {
   return Object.keys(data).map(function (keyName) {
     return encodeURIComponent(keyName) + '=' + encodeURIComponent(data[keyName])
   }).join('&');
 };
 
+loginModel.loaded = function(args) {
+  console.log("login loaded");
+
+  var page = args.object;
+  page.bindingContext = loginModel;
+  loginModel.set("message", "Please enter a username");
+}
+
 loginModel.login = function () {
-    var username = loginModel.get("username");
-    var password = loginModel.get("password");
+  console.log("view login");
 
-    // md5 the password
-    if (password) {
-      password = md5("pomme" + password);
-    }
+  user.login().then(function(response) {
+    console.log("login view success");
 
-    var formData = serialize({
-        name: username,
-        password: password
-    });
+    loginModel.set("message", "Session: " + user.get("session"));
 
-    http.request({
-      url: LOGIN_URL,
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      content: formData
-    }).then(function(response) {
-      var json = response.content.toJSON();
-
-      // successful login
-      if (json.session) {
-        loginModel.set("message", "Session: " + json.session);
-      // unsuccessful
-      } else if (json.error) {
-        if (json.error === "password") {
-          loginModel.set("message", "This account requires a password.");
-        } else if (json.error === "bad_password") {
-          loginModel.set("message", "Incorrect password. Try again.");
-        } else if (json.error === "illegal") {
-          loginModel.set("message", "Illegal username. Pick another.");
-        } else {
-          loginModel.set("message", "Error. Try Again.");
-        }
-      }
-    }, function(error) {
-      console.log("error:", error);
-    });
+    var topmost = frameModule.topmost();
+    topmost.navigate("views/lobby/lobby");
+  }, function(error) {
+    console.log("login view fail");
+  });
 };
 
-exports.loginModel = loginModel;
+loginModel.loadLobby = function () {
+  console.log("reload lobby");
+};
+
+exports.loaded = loginModel.loaded;
+exports.login = loginModel.login;
+exports.loadLobby = loginModel.loadLobby;

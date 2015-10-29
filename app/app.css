@@ -1,3 +1,59 @@
+@import { url('~/platform.css') };
+
 Page {
     background-color: #EFFDFE;
+}
+
+.logo {
+  horizontal-align: center;
+}
+
+.welcome {
+  font-size: 30;
+  margin:20;
+  horizontal-align: center;
+}
+
+.username-prompt,
+.password-prompt {
+  horizontal-align: center;
+
+}
+
+.username, .password {
+  horizontal-align: center;
+}
+
+.login {
+  horizontal-align: center;
+  background-color: #FFFFFF;
+  border-width: 1;
+  border-color: black;
+}
+
+.twitter-prompt {
+  horizontal-align: center;
+
+}
+
+.twitter-logo {
+  horizontal-align: center;
+
+}
+
+.have-account {
+  horizontal-align: center;
+  font-style: italic;
+}
+
+button {
+  font-size: 24;
+  horizontal-align: center;
+}
+
+.message {
+  font-size: 20;
+  color: #284848;
+  margin:10 40;
+  horizontal-align: center;
 }
