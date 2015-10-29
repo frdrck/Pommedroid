@@ -7,6 +7,9 @@
     <Label text="{{ message }}" cssClass="username-prompt"/>
     <TextField text="{{ username }}" cssClass="username"/>
 
+    <Label text="Password" cssClass="password-prompt"/>
+    <TextField text="{{ password }}" cssClass="password"/>
+
     <Button text="Submit" tap="{{login}}" cssClass="login"/>
 
     <Label text="Sign in with" cssClass="twitter-prompt"/>

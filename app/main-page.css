@@ -8,12 +8,13 @@
   horizontal-align: center;
 }
 
-.username-prompt {
+.username-prompt,
+.password-prompt {
   horizontal-align: center;
 
 }
 
-.username {
+.username, .password {
   horizontal-align: center;
 
 }

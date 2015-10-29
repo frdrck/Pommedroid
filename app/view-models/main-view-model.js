@@ -8,9 +8,9 @@ var POLL_URL = BASE_URL + "game/poll";
 
 var mainViewModel = new observable.Observable();
 
-mainViewModel.set("username", "asdfus");
-mainViewModel.set("password", "");
 mainViewModel.set("message", "Please enter a username");
+mainViewModel.set("username", "moon");
+mainViewModel.set("password", "teveaver");
 
 var serialize = function (data) {
   return Object.keys(data).map(function (keyName) {
@@ -19,9 +19,12 @@ var serialize = function (data) {
 };
 
 mainViewModel.login = function () {
+    var username = mainViewModel.get("username");
+    var password = mainViewModel.get("password");
+
     console.log("fetching", LOGIN_URL);
-    console.log("username:", mainViewModel.get("username"));
-    console.log("password:", mainViewModel.get("password"));
+    console.log("username:", username);
+    console.log("password:", password)
 
     http.request({
       url: LOGIN_URL,
@@ -30,34 +33,25 @@ mainViewModel.login = function () {
         "Content-Type": "application/x-www-form-urlencoded"
       },
       content: serialize({
-        name: mainViewModel.get("username")
-        //password: mainViewModel.get("password"),
+        name: mainViewModel.get("username"),
+        password: mainViewModel.get("password")
       })
     }).then(function(response) {
       var json = response.content.toJSON();
 
       // successful login
       if (json.session) {
-        mainViewModel.set("message", "session" + json.session);
-        console.log("message", "session" + json.session);
+        mainViewModel.set("message", "Session: " + json.session);
       // unsuccessful
       } else if (json.error) {
         if (json.error === "password") {
-          mainViewModel.set("message", "Requires Password: " + json.error);
-          console.log("message", "Requires Password: " + json.error);
+          mainViewModel.set("message", "This account requires a password.");
         } else if (json.error === "bad_password") {
-          mainViewModel.set("message", "Bad Password: " + json.error);
-          console.log("message", "Bad Password: " + json.error);
+          mainViewModel.set("message", "Incorrect password. Try again.");
         } else if (json.error === "illegal") {
-          mainViewModel.set("message", "Illegal:" + json.error);
-          console.log("message", "Illegal:" + json.error);
+          mainViewModel.set("message", "Illegal username. Pick another.");
         } else {
-          mainViewModel.set("message", "Error: " + json.error);
-          console.log("message", "Error: " + json.error);
-        }
-
-        for (var key in json) {
-          console.log("key:", key, json[key]);
+          mainViewModel.set("message", "Error. Try Again.");
         }
       }
     }, function(error) {
