@@ -1,6 +1,7 @@
 var textFieldModule = require("ui/text-field");
 var observable = require("data/observable");
 var http = require("http");
+var md5 = require("../lib/md5.js").md5;
 
 var BASE_URL = "http://pomme.us:32123/"
 var LOGIN_URL= BASE_URL + "user/login";
@@ -9,8 +10,8 @@ var POLL_URL = BASE_URL + "game/poll";
 var mainViewModel = new observable.Observable();
 
 mainViewModel.set("message", "Please enter a username");
-mainViewModel.set("username", "moon");
-mainViewModel.set("password", "teveaver");
+mainViewModel.set("username", "asdfus");
+mainViewModel.set("password", "");
 
 var serialize = function (data) {
   return Object.keys(data).map(function (keyName) {
@@ -22,9 +23,15 @@ mainViewModel.login = function () {
     var username = mainViewModel.get("username");
     var password = mainViewModel.get("password");
 
-    console.log("fetching", LOGIN_URL);
-    console.log("username:", username);
-    console.log("password:", password)
+    // md5 the password
+    if (password) {
+      password = md5("pomme" + password);
+    }
+
+    var formData = serialize({
+        name: username,
+        password: password
+    });
 
     http.request({
       url: LOGIN_URL,
@@ -32,10 +39,7 @@ mainViewModel.login = function () {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded"
       },
-      content: serialize({
-        name: mainViewModel.get("username"),
-        password: mainViewModel.get("password")
-      })
+      content: formData
     }).then(function(response) {
       var json = response.content.toJSON();
 
@@ -58,4 +62,5 @@ mainViewModel.login = function () {
       console.log("error:", error);
     });
 };
+
 exports.mainViewModel = mainViewModel;
