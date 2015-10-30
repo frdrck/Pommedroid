@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "form-urlencoded": "^0.1.4",
+    "lodash": "^3.10.1",
     "md5": "^2.0.0",
     "tns-core-modules": "1.4.0"
   },

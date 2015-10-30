@@ -10,7 +10,7 @@
             horizontalAlignment="left" verticalAlignment="center" />
           <Label text="{{ players + '/' + capacity }}" col="1" cssClass="capacity"
             horizontalAlignment="right" verticalAlignment="center" />
-          <Button text="Join" col="2"
+          <Button text="Join" col="2" tap="join"
             horizontalAlignment="right" verticalAlignment="center" />
         </GridLayout>
       </ListView.itemTemplate>

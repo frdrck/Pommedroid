@@ -2,6 +2,7 @@ var observableArrayModule = require("data/observable-array");
 var observable = require("data/observable");
 var http = require("http");
 var formurlencoded = require('form-urlencoded/index');
+var _ = require('lodash/index');
 
 var config = require("~/shared/config");
 var User = require("~/shared/view-models/user");
@@ -51,5 +52,16 @@ lobbyModel.loadLobby = function () {
   });
 };
 
+lobbyModel.join = function(args) {
+  console.log("clicked join");
+
+  // error on this next line vv
+  //var item = args.view.bindingContext;
+  //var index = lobbyModel.games.indexOf(item);
+  //console.log("item:", item);
+  //console.log("name:", lobbyModel.games[index].name);
+};
+
 exports.loaded = lobbyModel.loaded;
 exports.loadLobby = lobbyModel.loadLobby;
+exports.join = lobbyModel.join;
