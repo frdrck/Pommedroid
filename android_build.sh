@@ -1,1 +1,1 @@
-tns build android
+tns run android
