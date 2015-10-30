@@ -8,13 +8,6 @@ var loginModel = new observable.Observable({
   user: user
 });
 
-// util function that should be refactored.
-var serialize = function (data) {
-  return Object.keys(data).map(function (keyName) {
-    return encodeURIComponent(keyName) + '=' + encodeURIComponent(data[keyName])
-  }).join('&');
-};
-
 loginModel.loaded = function(args) {
   var page = args.object;
   page.bindingContext = loginModel;

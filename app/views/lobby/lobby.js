@@ -1,18 +1,11 @@
 var observableArrayModule = require("data/observable-array");
 var observable = require("data/observable");
 var http = require("http");
+var formurlencoded = require('form-urlencoded/index');
 
 var config = require("~/shared/config");
 var User = require("~/shared/view-models/user");
 var user = new User();
-
-// util. refactor.
-var serialize = function (data) {
-  return Object.keys(data).map(function (keyName) {
-    return encodeURIComponent(keyName) + '=' + encodeURIComponent(data[keyName])
-  }).join('&');
-};
-
 
 var lobbyModel = new observable.Observable({
   user: user,
@@ -29,7 +22,7 @@ lobbyModel.loaded = function(args) {
 };
 
 lobbyModel.loadLobby = function () {
-  var formData = serialize({
+  var formData = formurlencoded.encode({
     session: user.get("session"),
   });
 

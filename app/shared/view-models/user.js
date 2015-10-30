@@ -5,13 +5,7 @@ var http = require("http");
 
 var config = require("~/shared/config");
 var md5 = require("md5/md5");
-
-// util function
-var serialize = function (data) {
-  return Object.keys(data).map(function (keyName) {
-    return encodeURIComponent(keyName) + '=' + encodeURIComponent(data[keyName])
-  }).join('&');
-};
+var formurlencoded = require('form-urlencoded/index');
 
 function User() {
   var savedEmail = applicationSettings.getString("username", "");
@@ -46,7 +40,7 @@ function User() {
       password = md5("pomme" + password);
     }
 
-    var formData = serialize({
+    var formData = formurlencoded.encode({
         name: username,
         password: password
     });
