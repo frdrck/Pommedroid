@@ -4,7 +4,7 @@ var observable = require("data/observable");
 var http = require("http");
 
 var config = require("~/shared/config");
-var md5 = require("~/lib/md5.js").md5;
+var md5 = require("md5/md5");
 
 // util function
 var serialize = function (data) {
